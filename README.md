@@ -28,7 +28,11 @@ For example; to use this tool as is:
 into the root of the website. Or copy/paste below to only get "didJavaScriptFunctionRun"
 folder into a directory on your machine or the root of the site: 
 ```markdown
-mkdir didJavaScriptFunctionRun && cd didJavaScriptFunctionRun && curl https://codeload.github.com/isocialpractice/didJavaScriptFunctionRun/tar.gz/main | tar -xz --strip=2 didJavaScriptFunctionRun-repo-main/didJavaScriptFunctionRun && cd ..
+mkdir didJavaScriptFunctionRun &&\
+cd didJavaScriptFunctionRun &&\
+curl https://codeload.github.com/nobedee/didJavaScriptFunctionRun/tar.gz/main |\
+tar -xz --strip=2 didJavaScriptFunctionRun-main/didJavaScriptFunctionRun &&\
+cd ..
 ```
 
 2. Once the folder is in the site root paste the script below into the HTML head 
