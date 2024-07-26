@@ -10,7 +10,7 @@ lines of a simple form submission on a **php** page where:
 
 
 <details>
-<summary>The main function **didJavaScriptFunctionRun()** in `didJavaScriptFunctionRun.js` will: </summary>
+<summary>The main function <strong>didJavaScriptFunctionRun()</strong> in `didJavaScriptFunctionRun.js` will: </summary>
 
 1. Genereates a random sequence of data
 2. Uses AJAX to ouput to and store form data for php
@@ -23,15 +23,15 @@ variable accordingly.
 
 
 <details>
-<summary>The **make_random_file.php** file in the "scripts" folder will: </summary>
+<summary>The <strong>make_random_file.php</strong> file in the "scripts" folder will: </summary>
 
-1. Use query string from the random characters generated in didJavaScriptFunctionRUn() call
+1. Use query string from the random characters generated in didJavaScriptFunctionRun() call
 to create random files and folders.
    - **NOTE** - the query string is cleaned, but please report any vulnerablities found.
 2. Use these files to verify JavaScript ran.
 3. Delete the duplicate of **template_check.php**
 4. Delete any random folders in the "tmp" folder that are 1 day or older
-   - **NOTE** - these are only deleted when the page is open in a browser so you may 
+   - **NOTE** - these are only deleted when the page is opened in a browser so you may 
      want to periodically check and see if all random folders are deleted.   
    - Please report any issues or vulnerabilites with this.
 5. After 5 minutes delete random folder and file created in "tmp" folder.
@@ -42,7 +42,7 @@ to create random files and folders.
 
 
 <details>
-<summary>The **template_check.php** file in the "scripts" folder will: </summary>
+<summary>The <strong>template_check.php</strong> file in the "scripts" folder will: </summary>
 
 1. Uses the random characters from make_random_file.php 
 to output contents of text file (*should be yes*) for initial JavaScript check
@@ -54,7 +54,7 @@ to output contents of text file (*should be yes*) for initial JavaScript check
 ## Instructions:
 This tool is intended to be a starting point, but can be run as is on a simple php form
 that uses the form attribute ` action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" `.
-To use this tool as is or to get started:
+To use this tool as is or - to get started:
 
 1. Clone this directory, and then copy the folder "didJavaScriptFunctionRun" 
 into the root of the website. Or copy/paste below to only get "didJavaScriptFunctionRun"
