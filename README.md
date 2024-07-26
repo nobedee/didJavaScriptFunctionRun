@@ -56,9 +56,10 @@ This tool is intended to be a starting point, but can be run as is on a simple p
 that uses the form attribute ` action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" `.
 To use this tool as is or - to get started:
 
-1. Clone this directory, and then copy the folder "didJavaScriptFunctionRun" 
-into the root of the website. Or copy/paste below to only get "didJavaScriptFunctionRun"
-folder into a directory on your machine or the root of the site: 
+1. **Step 1** - Clone this repository, and then **copy** the 
+folder "**didJavaScriptFunctionRun**" into the **root** of the website. 
+Or copy/paste below to only get the repositories' folder "didJavaScriptFunctionRun"
+into a directory on your machine or directly into the site root:
 ```markdown
 mkdir didJavaScriptFunctionRun &&\
 cd didJavaScriptFunctionRun &&\
@@ -67,13 +68,13 @@ tar -xz --strip=2 didJavaScriptFunctionRun-main/didJavaScriptFunctionRun &&\
 cd ..
 ```
 
-2. Once the folder is in the site root paste the script below into the HTML head 
+2. **Step 2** - Once the folder is in the site root paste the script below into the **HTML head**
 of the pages you want the tool to run. <br>
 ```markdown
 <script src="/didJavaScriptFunctionRun/didJavaScriptFunctionRun.js"></script>
 ```
 
-3. Next copy and paste the php code into above the HTML form element. <br>
+3. **Step 3** - Next copy and paste the below php code **above** the HTML **form element**. <br>
 ```markdown
 
 <?php
@@ -91,8 +92,8 @@ of the pages you want the tool to run. <br>
  
 ```
 
-4. Next at the beginning of the HTML form element (<em>right after form opening tag</em>) 
-copy and paste the below HTML and php elements. <br>
+4. **Step 4** - At the **beginning** of the HTML **form element** (<em>right after form opening tag</em>) 
+copy and paste the below HTML, JavaScript, and php elements. <br>
 ```markdown
 
 <input type="text" value="<?php echo $didJavaScriptFunctionRunID; ?>" disabled style="display: none; border:none" id="didJavaScriptFunctionRunID" name="didJavaScriptFunctionRunID"> 
@@ -101,8 +102,8 @@ copy and paste the below HTML and php elements. <br>
  
 ```
 
-5. Then lastly paste or use a variation of the php code below to verify that JavaScript 
-did run in the browser. <br>
+5. **Step 5** - Lastly paste or use a variation of the below php code somewhere **after** the 
+HTML **form element** to verify that JavaScript did run in the browser. <br>
 ```markdown
 
  // Making sure to include the absolut path from site root to didJavaScriptFunctionRun folder.
