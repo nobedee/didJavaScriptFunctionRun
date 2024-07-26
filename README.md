@@ -39,38 +39,52 @@ of the pages you want the tool to run. <br>
 
 3. Next copy and paste the **php** code into above the HTML form element. <br>
 ```markdown
+
 <?php
 
  // Change is to a name of a required form input.
- $name_of_required_form_field = "email";
+ $name_of_required_form_field = "CHANGE_TO_REQUIRED_FORM_FIELD";
  
  // Include using absolut path from the site root.
  $did_javascript_function_run_path  = $_SERVER['DOCUMENT_ROOT'];   
- $did_javascript_function_run_path .= "/didJavaScriptFunctionRun/didJavaScriptFunctionRun.php";
- include_once($did_javascript_function_run_path);
+ $did_javascript_function_run_path .= "/didJavaScriptFunctionRun";
+ $did_javascript_function_run_PHP_FILE = $did_javascript_function_run_path . "/didJavaScriptFunctionRun.php";
+ include_once($did_javascript_function_run_PHP_FILE);
  
 ?>
+ 
 ```
 
 4. Next at the beginning of the HTML form element (<em>right after form opening tag</em>) paste the
 copy and paste the below HTML and php elements. <br>
 ```markdown
- <input type="text" value="<?php echo $didJavaScriptFunctionRunID; ?>" disabled 
-  style="display:none; border:none"
-  id="didJavaScriptFunctionRunID" name="didJavaScriptFunctionRunID">
- <script>{let didJavaScriptFunctionRunCheck_ID = document.getElementById("didJavaScriptFunctionRunID"); 
- didJavaScriptFunctionRunCheck_ID.removeAttribute("disabled"); didJavaScriptFunctionRun();}</script>
+
+<input type="text" value="<?php echo $didJavaScriptFunctionRunID; ?>" disabled style="display: none; border:none" id="didJavaScriptFunctionRunID" name="didJavaScriptFunctionRunID"> 
+<script>{let didJavaScriptFunctionRunCheck_ID = document.getElementById("didJavaScriptFunctionRunID"); 
+ didJavaScriptFunctionRunCheck_ID.removeAttribute("disabled");let checkSessionDidJavaScriptFunctionRun = sessionStorage.getItem("didJavaScriptRun");if (checkSessionDidJavaScriptFunctionRun == null) { sessionStorage.setItem("didJavaScriptRun", "1"); didJavaScriptFunctionRun();} else { sessionStorage.removeItem("didJavaScriptRun"); let essionDidJavaScriptFunctionRunCheck_randomCharacters = sessionStorage.getItem("didJavaScriptFunctionRunCheck_randomCharacters"); document.getElementById("didJavaScriptFunctionRunID").setAttribute("value", sessionDidJavaScriptFunctionRunCheck_randomCharacters); }}</script>  
+ 
 ```
 
 5. Then lastly paste or use a variation of the php code below to verify that JavaScript 
 did run on the browser. <br>
 ```markdown
- $didJavaScriptFunctionRunID = $_POST["didJavaScriptFunctionRunID"];
- if (strlen($didJavaScriptFunctionRunID) > 2 && $didJavaScriptFunctionRunID != "no JS") {
+
+ // Include using absolut path from the site root.
+ $did_javascript_function_run_path  = $_SERVER['DOCUMENT_ROOT'];   
+ $did_javascript_function_run_path .= "/didJavaScriptFunctionRun"; 
+ if (file_exists("$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt")) {  
   // Blocks where JavaScript did run.
-  mail("name@example.us", "Web Comment", $comment, $email);
- } else {
+  // Remove the random files created.
+  `rm "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt"`;
+  `rmdir "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID"`;  
+  // CHANGE
+  // mail("john@johns-book.com", "Web Comment", $comment, $email);
+  // mail("name@example.us", "Web Comment", $comment, $email);
+  }  else {
   // Blocks where JavaScript did not run.
-  echo "JavaScript did not run".
- } 
+  // CHANGE
+  // mail("john@johns-book.com", "Web Comment", "no", $email);  
+  echo "JavaScript did not run.";
+ }
+ 
 ```

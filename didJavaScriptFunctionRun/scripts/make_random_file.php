@@ -30,15 +30,4 @@
   
   `rm $random_php_file_name`; 
   
-  do {
-   if (file_exists("../tmp/$query/file.txt")) {
-    sleep(1);
-    `rm "../tmp/$query/file.txt"`;
-    `rmdir "../tmp/$query/"`;    
-    break;
-   }
-   sleep(1);
-  } while(!file_exists("../tmp/$query/file.txt")); 
-  
-  
 ?>

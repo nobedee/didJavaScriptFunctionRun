@@ -36,6 +36,7 @@ function didJavaScriptFunctionRun() {
  // send to php to check
  let runCount = 0;
  makeRandomSequence(8, ["lowerCaseCharacters", "upperCaseCharacters"]);
+ sessionStorage.setItem("didJavaScriptFunctionRunCheck_randomCharacters", didJavaScriptFunctionRunCheck_randomCharacters);
  var runCheckJSXMLHttp = function(curFile) {
   // toggle variable for random characters for query or empty value
   let outRandomSequence = "";
