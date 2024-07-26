@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <title>Did JavaScript Function Run</title>
+ <link rel="icon" href="favicon.png">
+  
+ <script src="sample_didJavaScriptFunctionRun.js"></script>
+ 
+ <style>
+ body {
+  margin-left: 50px;
+ }
+  div, nav, ul, li, a {
+   display: inline-block;
+   position: relative;
+   box-sizing: border-box;
+  }
+  div, nav, footer {
+   width: 100%;
+  }
+  nav {
+   background: black;   
+   height: 60px;
+  }
+  nav ul li a {
+   color: white;
+   padding: 10px;
+  }
+  main {
+   margin: 30px;
+  }
+  button {
+   margin: 10px;
+   padding: 15px;
+   cursor: pointer;
+   border-radius: 10px;
+   color: white;
+  }
+  button#did {
+   background: navy;
+  }
+  button#didnot {
+   background: darkred;   
+  }
+  span.key {
+   color: #0073e6;
+  }
+  span.str {
+   color: orangered;
+  }
+  span.int {
+   color: green;
+  }
+  span.mthd {
+   color: purple;
+  }
+  span.red {
+   color: red;
+  }
+  em {
+   color: dimgray;
+  }
+  footer {
+   position: fixed;
+   bottom: 0px;
+   height: 25%;   
+   background: black;
+   color: white;
+  }
+ </style>
+</head>
+
+<body>
+
+<h1>Did JavaScript Function Run Example:</h1><hr>
+
+<p>
+The script file <span class="str">didJavaScriptFunctionRun.js</span> is sourced in the HTML head, defining main variable - <span class="mthd">didJavaScriptFunctionRunCheck</span>.
+<br>
+Both functions use condition (<em>essentially</em>):
+</p>
+
+<code><pre> 
+ <span class="key">if</span> ( didJavaScriptFunctionRunCheck == <span class="int">1</span> ) { // <em>log to console</em>
+  console.log(<span class="str">&lt;?php <em>// server's response</em> ?&gt;</span>);
+ } <span class="key">else</span> { // <em>exit function</em>
+  <span class="key">return</span>; 
+ }
+</pre></code>
+<br>
+<p>
+Where one button calls <span class="mthd">didJavaScriptFunctionRun</span>() in <span class="int">onclick</span> method, and the other doesn't;
+<br>
+<span id="phpNote"></span>
+</p>
+
+<br>
+
+<form>
+ <label for="fname">Enter Name:</label><br>
+ <input type="text" id="fname" name="fname" value=""> 
+ 
+ <br><br>
+ 
+ <div id="hideCheck" style="display:none">
+  <label for="didJavaScriptFunctionRunID">Did JavaScript Run in Browser:</label><br>
+  <input type="text" value="" disabled style="border:none"
+   id="didJavaScriptFunctionRunID" name="didJavaScriptFunctionRunID"> 
+ </div>  
+ 
+ <br><br>
+ 
+ <button id="did" type="button"
+  onclick="didRun()"
+ >[ 1 ] Function Where JavaScript did Run</button>
+ <br>
+ <button id="didnot" type="button"
+  onclick="didNotRun()"
+ >[ 2 ] Function Where JavaScript DID NOT Run</button>
+<input id="submitButton" style="display:none" type="submit" value="submit">
+</form>
+
+
+<br><br>
+
+<p id="out"></p>
+
+<script>
+ 
+ var out = document.getElementById("out");
+ var phpNote = document.getElementById("phpNote");
+ var noteAboutPHP = "<strong>NOTE</strong> - this should be used on a <strong>PHP</strong> webpage. This HTML file is for example purposes an meant to communicate the general idea.";
+ var outMsg = `JavaScript did run in the browser. <br>
+ Again ` + noteAboutPHP;
+ 
+ phpNote.innerHTML = noteAboutPHP;
+ 
+ var submitButton = document.getElementById("submitButton");
+ // Button [ 1 ]
+ function didRun() {   
+  didJavaScriptFunctionRun();
+  setTimeout(function() {
+   if ( didJavaScriptFunctionRunCheck == 1 ) {
+    console.log(outMsg);
+    setTimeout(function() { submitButton.click(); }, 200);
+   } else { // exit function
+    setTimeout( function() { return; }, 100);
+   }
+   out.innerHTML = outMsg;
+  }, 1000);
+ }
+ // Button [ 2 ]
+ function didNotRun() {  
+  if ( didJavaScriptFunctionRunCheck == 1 ) {
+   console.log(outMsg);
+  } else { // exit function
+   out.innerHTML = outMsg.replace("did", "<span class='red'>DID NOT</span>");  
+   setTimeout( function() { return; }, 100);
+  }  
+ }
+ 
+</script>
+
+</body>
+</html>

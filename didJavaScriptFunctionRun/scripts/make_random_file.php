@@ -30,4 +30,23 @@
   
   `rm $random_php_file_name`; 
   
+  // Remove files in tmp folder over a day old.  
+  `find ../tmp/*  -type f -mtime +0 -not -path ../tmp/README.md -print | xargs rm -rf`;
+
+  $_delete_after_while = 0;
+  
+  // Delete temp after 6 minutes.
+  if (file_exists("../tmp/$query/file.txt")) {
+   do {
+    $_delete_after_while += 1;  
+    sleep(1);
+    if ($_delete_after_while >= 150) {
+      `rm "../tmp/$query/file.txt"`;
+      `rmdir "../tmp/$query/"`;    
+      break;
+    }
+   sleep(1);     
+   } while(file_exists("../tmp/$query/file.txt"));
+  }
+  
 ?>
