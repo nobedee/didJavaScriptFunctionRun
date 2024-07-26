@@ -1,6 +1,6 @@
 # Did JavaScript Function Run
 
-`Ctrl + click` to see example of [didJavaScriptFunctionRun.js](https://nobedee.github.io/didJavaScriptFunctionRun/)
+`Ctrl + click` to see example of [didJavaScriptFunctionRun.js](https://jhauga.github.io/htmlpreview.github.com/?https://github.com/nobedee/didJavaScriptFunctionRun/blob/main/index.html)
 
 On the server check to see if JavaScript was run in the browser. 
 Creates random characters and posts them to an HTML elemement. This
