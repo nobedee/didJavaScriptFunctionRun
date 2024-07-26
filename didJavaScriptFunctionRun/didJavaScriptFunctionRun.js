@@ -3,16 +3,18 @@
 
 // Global variables with unlikely names.
 var didJavaScriptFunctionRunCheck, didJavaScriptFunctionRunCheck_randomCharacters, didJavaScriptFunctionRunCheck_ID;
-
+var didJavaScriptFunctionRun_DEBUG = 0;
 function didJavaScriptFunctionRun() {
  // define the global variables 
  didJavaScriptFunctionRunCheck_randomCharacters = ""; 
  didJavaScriptFunctionRunCheck_ID = document.getElementById("didJavaScriptFunctionRunID"); 
+ didJavaScriptFunctionRunCheck_ID.removeAttribute("disabled");
  // make a random sequence using default parameters
  var makeRandomSequence = function(
   randomLength = 8, 
   randomData = [ "digits", "lowerCaseCharacters", "upperCaseCharacters" ]
  ) {
+  didJavaScriptFunctionRunCheck_randomCharacters = ""; 
   let randomObject = {
    "digits": "0123456789",
    "lowerCaseCharacters": "abcdefghijklmnopqrstuvwxyz",
@@ -33,19 +35,16 @@ function didJavaScriptFunctionRun() {
  
  // send to php to check
  let runCount = 0;
+ makeRandomSequence(8, ["lowerCaseCharacters", "upperCaseCharacters"]);
  var runCheckJSXMLHttp = function(curFile) {
-  // redefine with each call
-  didJavaScriptFunctionRunCheck_randomCharacters = ""; 
-  // call to make random sequence
-  makeRandomSequence(8, ["lowerCaseCharacters", "upperCaseCharacters"]);
-  // store output in variable  
+  // toggle variable for random characters for query or empty value
   let outRandomSequence = "";
   let checkJSxmlhttp = new XMLHttpRequest();
-  checkJSxmlhttp.onreadystatechange = function() {   
+  checkJSxmlhttp.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
-    if (runCount == 0) {     
+    if (runCount == 0) {
      if (this.responseText.indexOf("yes") > -1) {
-      didJavaScriptFunctionRunCheck = 1;     
+      didJavaScriptFunctionRunCheck = 1;
      } else {
       didJavaScriptFunctionRunCheck = 0;
      }    
@@ -53,10 +52,11 @@ function didJavaScriptFunctionRun() {
      outRandomSequence = "";
      if (this.responseText) {
       outRandomSequence = "";
+      didJavaScriptFunctionRunCheck = 1;
       didJavaScriptFunctionRunCheck_ID.value = this.responseText;
-      didJavaScriptFunctionRunCheck_ID.style.display = "";
-      // log run result to console
-      console.log(this.responseText);
+      didJavaScriptFunctionRunCheck_ID.style.display = "none";
+      // log run result to console - FOR DEBUG
+      if (didJavaScriptFunctionRun_DEBUG == 1) { console.log(this.responseText); }
      }
     }
    }
@@ -70,31 +70,13 @@ function didJavaScriptFunctionRun() {
   checkJSxmlhttp.send();
   };
  
- setTimeout(function() {
-  runCheckJSXMLHttp("/didJavaScriptFunctionRun/scripts/make_random_file.php");
- }, 100);
+ runCheckJSXMLHttp("/didJavaScriptFunctionRun/scripts/make_random_file.php");
+ 
  setTimeout(function() {
   runCount = 1;
   runCheckJSXMLHttp(
-   "https://practicecode.xyz/didJavaScriptFunctionRun/tmp/" + 
+   "/didJavaScriptFunctionRun/tmp/" + 
    didJavaScriptFunctionRunCheck_randomCharacters + 
    "/file.txt");
- }, 1000); 
+ }, 500); 
 }
-
-// Call this function where you want it to check, followed by a condition to check. 
-// Or - copy/paste  lines in comment below:
-/******************************************************************************
-
- // call repos root function
- didJavaScriptFunctionRun();
- 
- // check if it was run in the browser 
- if ( didJavaScriptFunctionRunCheck == 1 ) {
-  console.log(outMsg);
- } else { // exit function
-  setTimeout( function() { return; }, 500);
- }
-
-******************************************************************************
-*******************************************************************************/
