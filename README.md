@@ -96,30 +96,63 @@ of the pages you want the tool to run. <br>
 copy and paste the below HTML, JavaScript, and php elements. <br>
 ```markdown
 
-<input type="text" value="<?php echo $didJavaScriptFunctionRunID; ?>" disabled style="display: none; border:none" id="didJavaScriptFunctionRunID" name="didJavaScriptFunctionRunID"> 
-<script>{let didJavaScriptFunctionRunCheck_ID = document.getElementById("didJavaScriptFunctionRunID"); 
- didJavaScriptFunctionRunCheck_ID.removeAttribute("disabled");let checkSessionDidJavaScriptFunctionRun = sessionStorage.getItem("didJavaScriptRun");if (checkSessionDidJavaScriptFunctionRun == null) { sessionStorage.setItem("didJavaScriptRun", "1"); didJavaScriptFunctionRun();} else { sessionStorage.removeItem("didJavaScriptRun"); let essionDidJavaScriptFunctionRunCheck_randomCharacters = sessionStorage.getItem("didJavaScriptFunctionRunCheck_randomCharacters"); document.getElementById("didJavaScriptFunctionRunID").setAttribute("value", sessionDidJavaScriptFunctionRunCheck_randomCharacters); }}</script>  
+ <input type="text" value="<?php echo $didJavaScriptFunctionRunID; ?>" disabled style="display: none; border:none" id="didJavaScriptFunctionRunID" name="didJavaScriptFunctionRunID"> 
+ <script>{let didJavaScriptFunctionRunCheck_ID = document.getElementById("didJavaScriptFunctionRunID"); 
+ didJavaScriptFunctionRunCheck_ID.removeAttribute("disabled");let checkSessionDidJavaScriptFunctionRun = sessionStorage.getItem("didJavaScriptRun");if (checkSessionDidJavaScriptFunctionRun == null) { sessionStorage.setItem("didJavaScriptRun", "1"); didJavaScriptFunctionRun();} else { sessionStorage.removeItem("didJavaScriptRun"); let sessionDidJavaScriptFunctionRunCheck_randomCharacters = sessionStorage.getItem("didJavaScriptFunctionRunCheck_randomCharacters"); document.getElementById("didJavaScriptFunctionRunID").setAttribute("value", sessionDidJavaScriptFunctionRunCheck_randomCharacters); }}</script>  
  
 ```
 
-5. **Step 5** - Lastly paste or use a variation of the below php code somewhere **after** the 
+5. **Step 5** - Paste or use a variation of the below php code somewhere **after** the 
 HTML **form element** to verify that JavaScript did run in the browser. <br>
 ```markdown
 
  // Making sure to include the absolut path from site root to didJavaScriptFunctionRun folder.
+ // Set path.
  $did_javascript_function_run_path  = $_SERVER['DOCUMENT_ROOT'];   
  $did_javascript_function_run_path .= "/didJavaScriptFunctionRun"; 
- if (file_exists("$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt")) {  
+ if (strlen($didJavaScriptFunctionRunID) > 1) {
+  // Clean
+  $didJavaScriptFunctionRunID = trim($didJavaScriptFunctionRunID); 
+  $didJavaScriptFunctionRunID = htmlspecialchars($didJavaScriptFunctionRunID); 
+  $didJavaScriptFunctionRunID = preg_replace('/[.\/]/', "", $didJavaScriptFunctionRunID);      
+ }
+ if (file_exists("$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt")) {
   // Blocks where JavaScript did run.
   // Remove the random files created.
   `rm "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt"`;
   `rmdir "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID"`;  
   // CHANGE  
   // mail("CHANGE@example.us", "Web Comment", $comment, $email);
-  }  else {
+
+  // NOTE - if no submit button id then add one and change it here or a variation of this method.
+  //        if not disabled form will not submit on second press and run will created random folder,
+  //        leaving them there for a day before deleting.
+  echo <<< DISABLE_SUBMIT
+   <script>
+    sessionStorage.setItem("formSubmittedDidJavaScriptFunctionRun", "1");
+    var submitButtonDidJavaScriptRun = document.getElementById("submitButtonDidJavaScriptRun");
+    setTimeout(function() {
+     submitButtonDidJavaScriptRun.setAttribute("disabled", true);
+    }, 500);
+   </script>
+DISABLE_SUBMIT;
+ }  else {
   // Blocks where JavaScript did not run.
   // CHANGE 
   echo "JavaScript did not run.";
-  }
+ }
  
+```
+
+6. **Step 6** - Lastly paste the below HTML **script** somewhere **after** step 5, around the **bottom** of page. <br>
+```markdown
+
+<script>
+ var formSubmittedDidJavaScriptFunctionRun = sessionStorage.getItem("formSubmittedDidJavaScriptFunctionRun");
+ if (formSubmittedDidJavaScriptFunctionRun != null) {
+  let submitButtonDidJavaScriptRun = document.getElementById("submitButtonDidJavaScriptRun");
+  submitButtonDidJavaScriptRun.setAttribute("disabled", true); 
+ }
+</script>    
+
 ```
