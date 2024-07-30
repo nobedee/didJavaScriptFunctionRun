@@ -3,6 +3,7 @@
 
 // Global variables with unlikely names.
 var didJavaScriptFunctionRunCheck, didJavaScriptFunctionRunCheck_randomCharacters, didJavaScriptFunctionRunCheck_ID;
+var didJavaScriptFunctionRun_localStorage;
 var didJavaScriptFunctionRun_DEBUG = 0;
 function didJavaScriptFunctionRun() {
  // define the global variables 
@@ -35,15 +36,21 @@ function didJavaScriptFunctionRun() {
  
  // send to php to check
  let runCount = 0;
- makeRandomSequence(8, ["lowerCaseCharacters", "upperCaseCharacters"]);
- sessionStorage.setItem("didJavaScriptFunctionRunCheck_randomCharacters", didJavaScriptFunctionRunCheck_randomCharacters);
+ if (localStorage.getItem("didJavaScriptFunctionRun_localStorage") == null) {
+  makeRandomSequence(8, ["lowerCaseCharacters", "upperCaseCharacters"]);
+  localStorage.setItem("didJavaScriptFunctionRun_localStorage", didJavaScriptFunctionRunCheck_randomCharacters);
+  sessionStorage.setItem("didJavaScriptFunctionRunCheck_randomCharacters", didJavaScriptFunctionRunCheck_randomCharacters);
+ } else {
+  didJavaScriptFunctionRun_localStorage = localStorage.getItem("didJavaScriptFunctionRun_localStorage");
+  didJavaScriptFunctionRunCheck_randomCharacters = didJavaScriptFunctionRun_localStorage;
+ }
  var runCheckJSXMLHttp = function(curFile) {
   // toggle variable for random characters for query or empty value
   let outRandomSequence = "";
   let checkJSxmlhttp = new XMLHttpRequest();
   checkJSxmlhttp.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
-    if (runCount == 0) {
+    if (runCount === 0) {
      if (this.responseText.indexOf("yes") > -1) {
       didJavaScriptFunctionRunCheck = 1;
      } else {
@@ -62,10 +69,11 @@ function didJavaScriptFunctionRun() {
     }
    }
   };
-  if (runCount == 0) {
-   outRandomSequence = "?" + didJavaScriptFunctionRunCheck_randomCharacters; 
+  
+  if (runCount === 0) {
+   outRandomSequence = "?" + didJavaScriptFunctionRunCheck_randomCharacters;    
   } else {
-   outRandomSequence = "";
+   outRandomSequence = "";   
   }
   checkJSxmlhttp.open("GET", curFile + outRandomSequence, true);
   checkJSxmlhttp.send();

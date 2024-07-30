@@ -117,17 +117,24 @@ HTML **form element** to verify that JavaScript did run in the browser. <br>
   $didJavaScriptFunctionRunID = htmlspecialchars($didJavaScriptFunctionRunID); 
   $didJavaScriptFunctionRunID = preg_replace('/[.\/]/', "", $didJavaScriptFunctionRunID);      
  }
+ // turn on variable
  if (file_exists("$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt")) {
   // Blocks where JavaScript did run.
   // Remove the random files created.
   `rm "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt"`;
   `rmdir "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID"`;  
-  // CHANGE  
+  $didJavaScriptFunctionRun = 1;
+ } else {
+  $didJavaScriptFunctionRun = 0;
+ }
+ if ($didJavaScriptFunctionRun == 1) {
+  // CHANGE  -  PHP when JavaScript runs in browser.
   // mail("CHANGE@example.us", "Web Comment", $comment, $email);
 
   // NOTE - if no submit button id then add one and change it here or a variation of this method.
   //        if not disabled form will not submit on second press and run will created random folder,
   //        leaving them there for a day before deleting.
+ 
   echo <<< DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN
    <script>
     sessionStorage.setItem("formSubmittedDidJavaScriptFunctionRun", "1");
@@ -140,7 +147,8 @@ DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN;
  }  else {
   // Blocks where JavaScript did not run.
   // CHANGE 
-  echo "JavaScript did not run.";
+  // echo "JavaScript did not run.";
+  echo "";
  }
 ?>
  
@@ -154,7 +162,16 @@ DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN;
  if (formSubmittedDidJavaScriptFunctionRun != null) {
   let submitButtonDidJavaScriptRun = document.getElementById("submitButtonDidJavaScriptRun");
   submitButtonDidJavaScriptRun.setAttribute("disabled", true); 
+  window.addEventListener("beforeunload", function(){
+   let outxmlhttp = new XMLHttpRequest();
+   outxmlhttp.onload = function() {
+    console.log("removing tmp files");
+   };
+   outxmlhttp.open("GET", "/didJavaScriptFunctionRun/scripts/delete_random_file.php?" + didJavaScriptFunctionRunCheck_randomCharacters, true);
+   outxmlhttp.send();
+  });   
  }
 </script>    
+
 
 ```
