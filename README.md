@@ -106,6 +106,7 @@ copy and paste the below HTML, JavaScript, and php elements. <br>
 HTML **form element** to verify that JavaScript did run in the browser. <br>
 ```markdown
 
+<?php
  // Making sure to include the absolut path from site root to didJavaScriptFunctionRun folder.
  // Set path.
  $did_javascript_function_run_path  = $_SERVER['DOCUMENT_ROOT'];   
@@ -127,7 +128,7 @@ HTML **form element** to verify that JavaScript did run in the browser. <br>
   // NOTE - if no submit button id then add one and change it here or a variation of this method.
   //        if not disabled form will not submit on second press and run will created random folder,
   //        leaving them there for a day before deleting.
-  echo <<< DISABLE_SUBMIT
+  echo <<< DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN
    <script>
     sessionStorage.setItem("formSubmittedDidJavaScriptFunctionRun", "1");
     var submitButtonDidJavaScriptRun = document.getElementById("submitButtonDidJavaScriptRun");
@@ -135,12 +136,13 @@ HTML **form element** to verify that JavaScript did run in the browser. <br>
      submitButtonDidJavaScriptRun.setAttribute("disabled", true);
     }, 500);
    </script>
-DISABLE_SUBMIT;
+DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN;
  }  else {
   // Blocks where JavaScript did not run.
   // CHANGE 
   echo "JavaScript did not run.";
  }
+?>
  
 ```
 
