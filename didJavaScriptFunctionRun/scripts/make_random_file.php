@@ -10,7 +10,7 @@
   $query = urldecode($query);
   $query = trim($query);
   $query = htmlspecialchars($query);
-  $query = preg_replace('/[.\/]/', "", $query);
+  $query = preg_replace('/[.\/=]/', "", $query);
   $q_file = "../tmp/$query.txt";
   
   if (!file_exists("../tmp/$query/file.txt")) {
