@@ -4,7 +4,7 @@
   $out_query = urldecode($out_query);
   $out_query = trim($out_query);
   $out_query = htmlspecialchars($out_query);
-  $out_query = preg_replace('/[.\/=]/', "", $out_query);
+  $out_query = preg_replace('/[.\/=$]/', "", $out_query);
   $out_q_file = "../tmp/$out_query";
   
   if (file_exists($out_q_file . "/file.txt")) {
