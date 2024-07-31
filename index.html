@@ -243,6 +243,12 @@ Click below to see an example with instructions of how/where to place inline cod
     // Remove the random files created.
     `rm "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt"`;
     `rmdir "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID"`;  
+    $didJavaScriptFunctionRun = 1;
+   } else {
+    $didJavaScriptFunctionRun = 0;
+   }
+   // PHP - Condition if $didJavaScriptFunctionRun == 1, else do something else.
+   if ($didJavaScriptFunctionRun == 1) {    
     // JavaScript Function did run so block runs on server.  
     mail("serverMail@example.com", "Web Comment", $comment, $email);
   
@@ -252,6 +258,9 @@ Click below to see an example with instructions of how/where to place inline cod
     echo &lt;&lt;&lt; DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN
      &lt;script&gt;
       sessionStorage.setItem("formSubmittedDidJavaScriptFunctionRun", "1");
+                                                                 // CHANGE TO SUBMIT BUTTON ID
+      var submitButtonDidJavaScriptRun = document.getElementById("submitButtonDidJavaScriptRun");
+      if (submitButtonDidJavaScriptRun) {      
       var submitButtonDidJavaScriptRun = document.getElementById("submitButtonDidJavaScriptRun");
       setTimeout(function() {
        submitButtonDidJavaScriptRun.setAttribute("disabled", true);
