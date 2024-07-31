@@ -131,7 +131,7 @@ HTML **form element** to verify that JavaScript did run in the browser. <br>
   // Clean
   $didJavaScriptFunctionRunID = trim($didJavaScriptFunctionRunID); 
   $didJavaScriptFunctionRunID = htmlspecialchars($didJavaScriptFunctionRunID); 
-  $didJavaScriptFunctionRunID = preg_replace('/[.\/]/', "", $didJavaScriptFunctionRunID);      
+  $didJavaScriptFunctionRunID = preg_replace('/[.\/=]/', "", $didJavaScriptFunctionRunID);      
  }
  // turn on variable
  if (file_exists("$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt")) {
@@ -179,24 +179,12 @@ DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN;
  
 ```
 
-6. **Step 6** - Lastly paste the below HTML **script** somewhere **after** step 5, around the **bottom** of page. <br>
+6. **Step 6** - Lastly paste the below **script** somewhere **after** step 5, around the **bottom** of page. This deletes 
+all tmp elements if no input or button elements have been clicked so process from "make_random_file.php" won't continue to 
+run after the page has closed.<br>
 ```markdown
 
-<script>
- var formSubmittedDidJavaScriptFunctionRun = sessionStorage.getItem("formSubmittedDidJavaScriptFunctionRun");
- if (formSubmittedDidJavaScriptFunctionRun != null) {
-  let submitButtonDidJavaScriptRun = document.getElementById("submitButtonDidJavaScriptRun");
-  submitButtonDidJavaScriptRun.setAttribute("disabled", true); 
-  window.addEventListener("beforeunload", function(){
-   let outxmlhttp = new XMLHttpRequest();
-   outxmlhttp.onload = function() {
-    console.log("removing tmp files");
-   };
-   outxmlhttp.open("GET", "/didJavaScriptFunctionRun/scripts/delete_random_file.php?" + didJavaScriptFunctionRunCheck_randomCharacters, true);
-   outxmlhttp.send();
-  });   
- }
-</script>    
+<script src="/didJavaScriptFunctionRun/scripts/deleteTmpDidJavaScriptFunctionRun.js"></script>  
 
 
 ```
