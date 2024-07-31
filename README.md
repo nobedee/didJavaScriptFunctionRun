@@ -10,7 +10,7 @@ lines of a simple form submission on a **php** page where:
 
 
 <details>
-<summary>The main function <strong>didJavaScriptFunctionRun()</strong> in `didJavaScriptFunctionRun.js` will: </summary>
+<summary>The main function <strong>didJavaScriptFunctionRun()</strong> in "didJavaScriptFunctionRun.js" will: </summary>
 
 1. Genereates a random sequence of data
 2. Uses AJAX to ouput to and store form data for php
