@@ -51,6 +51,14 @@ to output contents of text file (*should be yes*) for initial JavaScript check
 </details>
 
 <details>
+<summary>The <strong>deleteTmpDidJavaScriptFunctionRun.js</strong> file in the "scripts" folder will: </summary>
+1. Make a sessionStorage variable to is set to 0 on first page load.
+2. Adds an event listenr to the HTML window object that checks for page close or reload.
+3. Adds an event listener to HTML input and button elements that removes the window listener from "2".
+4. If no button or input elements have been clicked then AJAX is used to call **delete_random_file.php**,
+which will delete the random tmp files that were created for JavaScript check.
+
+<details>
 <summary>The <strong>delete_random_file.php</strong> file in the "scripts" folder will: </summary>
 
 1. Be called when the window closes or page is refreshed after the form is submitted.
