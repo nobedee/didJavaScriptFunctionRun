@@ -250,8 +250,17 @@ Click below to see an example with instructions of how/where to place inline cod
    // PHP - Condition if $didJavaScriptFunctionRun == 1, else do something else.
    if ($didJavaScriptFunctionRun == 1) {    
     // JavaScript Function did run so block runs on server.  
-    mail("serverMail@example.com", "Web Comment", $comment, $email);
-  
+    
+    if ($comment == true and $email == true and $emailErr == "") {
+     mail("serverMail@example.com", "Web Comment", $comment, $email);
+     echo $formSub;
+    } elseif ($comment == true or $email == true or $emailErr == true) {
+     echo '
+      &lt;div class="page-headline text-left"&gt;
+       &lt;h1&gt;Form NOT Submitted&lt;/h1&gt;
+       &lt;p class="lead"&gt;Refresh page and fill in required fields and try again.&lt;/p&gt;
+      &lt;/div&gt;';
+    }       
     // NOTE - if no submit button id then add one and change it here or a variation of this method.
     //        if not disabled form will not submit on second press and run will created random folder,
     //        leaving them there for a day before deleting.
