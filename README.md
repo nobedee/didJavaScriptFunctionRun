@@ -102,6 +102,15 @@ copy and paste the below HTML, JavaScript, and php elements. <br>
  
 ```
 
+   - **Step 4b** <em>optional</em> - Give the submit button's id the value of "formSubmittedDidJavaScriptFunctionRun":
+```markdoen
+ id="formSubmittedDidJavaScriptFunctionRun"
+```
+   - Or add to existing id for submit button:
+```markdown
+ formSubmittedDidJavaScriptFunctionRun
+```
+
 5. **Step 5** - Paste or use a variation of the below php code somewhere **after** the 
 HTML **form element** to verify that JavaScript did run in the browser. <br>
 ```markdown
@@ -128,27 +137,36 @@ HTML **form element** to verify that JavaScript did run in the browser. <br>
   $didJavaScriptFunctionRun = 0;
  }
  if ($didJavaScriptFunctionRun == 1) {
+  // ******************************************************************
   // CHANGE  -  PHP when JavaScript runs in browser.
   // mail("CHANGE@example.us", "Web Comment", $comment, $email);
+  // ******************************************************************
 
   // NOTE - if no submit button id then add one and change it here or a variation of this method.
   //        if not disabled form will not submit on second press and run will created random folder,
   //        leaving them there for a day before deleting.
  
+ 
+  // NOTE - best to keep below lines, ensuring that the submit button has same id value.
   echo <<< DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN
    <script>
     sessionStorage.setItem("formSubmittedDidJavaScriptFunctionRun", "1");
+                                                               // CHANGE TO SUBMIT BUTTON ID
     var submitButtonDidJavaScriptRun = document.getElementById("submitButtonDidJavaScriptRun");
-    setTimeout(function() {
-     submitButtonDidJavaScriptRun.setAttribute("disabled", true);
-    }, 500);
+    if (submitButtonDidJavaScriptRun) {
+     setTimeout(function() {
+      submitButtonDidJavaScriptRun.setAttribute("disabled", true);
+     }, 500);
+    }
    </script>
 DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN;
  }  else {
   // Blocks where JavaScript did not run.
+  
   // CHANGE 
   // echo "JavaScript did not run.";
   echo "";
+  
  }
 ?>
  
