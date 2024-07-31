@@ -50,6 +50,13 @@ to output contents of text file (*should be yes*) for initial JavaScript check
 
 </details>
 
+<details>
+<summary>The <strong>delete_random_file.php</strong> file in the "scripts" folder will: </summary>
+
+1. Be called when the window closes or page is refreshed after the form is submitted.
+2. Delete the tmp files if they still exists on the server.
+   - this will end any processes that have been prolonged in regards to removing the tmp files.
+</details>
 
 ## Instructions:
 This tool is intended to be a starting point, but can be run as is on a simple php form
