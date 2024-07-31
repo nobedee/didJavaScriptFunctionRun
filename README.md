@@ -140,7 +140,7 @@ HTML **form element** to verify that JavaScript did run in the browser. <br>
   // Clean
   $didJavaScriptFunctionRunID = trim($didJavaScriptFunctionRunID); 
   $didJavaScriptFunctionRunID = htmlspecialchars($didJavaScriptFunctionRunID); 
-  $didJavaScriptFunctionRunID = preg_replace('/[.\/=]/', "", $didJavaScriptFunctionRunID);      
+  $didJavaScriptFunctionRunID = preg_replace('/[.\/=$]/', "", $didJavaScriptFunctionRunID);      
  }
  // turn on variable
  if (file_exists("$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt")) {
