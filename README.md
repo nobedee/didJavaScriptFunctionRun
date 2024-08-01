@@ -21,7 +21,6 @@ variable accordingly.
 
 </details>
 
-
 <details>
 <summary>The <strong>make_random_file.php</strong> file in the "scripts" folder will: </summary>
 
@@ -39,7 +38,6 @@ to create random files and folders.
    - Please report any issues or vulnerabilites with this.
 
 </details>
-
 
 <details>
 <summary>The <strong>template_check.php</strong> file in the "scripts" folder will: </summary>
@@ -65,6 +63,25 @@ which will delete the random tmp files that were created for JavaScript check.
 1. Be called when the window closes or page is refreshed after the form is submitted.
 2. Delete the tmp files if they still exists on the server.
    - this will end any processes that have been prolonged in regards to removing the tmp files.
+</details>
+
+<details>
+<summary>The <strong>clean_random_character_function.php</strong> file in the "scripts" folder will:
+
+1. Clean the random characters or data passed to the "didJavaScriptFunctionRunID" hidden 
+form/input element so the scripts handle the data correctly.
+   - Mainly this ensures that the "tmp" folder is the target for creating, checking, and deleting the
+   tmp files that are used to check if JavaScript ran on the server.
+</details>
+
+<details>
+<summary>The <strong>did_java_script_function_run.php</strong> file in "scripts" folder will:
+
+1. Utilize the elements from prior scripts to store a value of 1 or 0 in the variable
+"$didJavaScriptFunctionRun".
+   - This is the main goal of the template.
+2. Enables the server to handle actions according to whether or not the page was loaded 
+in a browser or not.
 </details>
 
 ## Instructions:
