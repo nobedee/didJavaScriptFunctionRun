@@ -103,6 +103,7 @@ of the pages you want the tool to run. <br>
  $did_javascript_function_run_path .= "/didJavaScriptFunctionRun";
  $did_javascript_function_run_PHP_FILE = $did_javascript_function_run_path . "/didJavaScriptFunctionRun.php";
  include_once($did_javascript_function_run_PHP_FILE);
+ require($did_javascript_function_run_path . "/scripts/clean_random_character_function.php");
  
 ?>
  
@@ -132,28 +133,17 @@ HTML **form element** to verify that JavaScript did run in the browser. <br>
 ```markdown
 
 <?php
+
  // Making sure to include the absolut path from site root to didJavaScriptFunctionRun folder.
  // Set path.
  $did_javascript_function_run_path  = $_SERVER['DOCUMENT_ROOT'];   
  $did_javascript_function_run_path .= "/didJavaScriptFunctionRun"; 
- if (strlen($didJavaScriptFunctionRunID) > 1) {
-  // Clean
-  $didJavaScriptFunctionRunID = trim($didJavaScriptFunctionRunID); 
-  $didJavaScriptFunctionRunID = htmlspecialchars($didJavaScriptFunctionRunID); 
-  $didJavaScriptFunctionRunID = preg_replace('/[.\/=$]/', "", $didJavaScriptFunctionRunID);      
- }
- // turn on variable
- if (file_exists("$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt")) {
-  // Blocks where JavaScript did run.
-  // Remove the random files created.
-  `rm "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID/file.txt"`;
-  `rmdir "$did_javascript_function_run_path/tmp/$didJavaScriptFunctionRunID"`;  
-  $didJavaScriptFunctionRun = 1;
- } else {
-  $didJavaScriptFunctionRun = 0;
- }
+ require($did_javascript_function_run_path . "/scripts/did_java_script_function_run.php");
+ 
+ // Check results from php script required above and run php accordingly.
  if ($didJavaScriptFunctionRun == 1) {
-  // ******************************************************************
+  // ***********************************************************************************
+  // START - PHP AS NEEDED ************************************************************* 
   // CHANGE  -  PHP when JavaScript runs in browser.
   // mail("CHANGE@example.us", "Web Comment", $comment, $email);
   // ******************************************************************
@@ -162,7 +152,8 @@ HTML **form element** to verify that JavaScript did run in the browser. <br>
   //        if not disabled form will not submit on second press and run will created random folder,
   //        leaving them there for a day before deleting.
  
- 
+  // END - PHP AS NEEDED *************************************************************** 
+  // ***********************************************************************************
   // NOTE - best to keep below lines, ensuring that the submit button has same id value.
   echo <<< DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN
    <script>
@@ -177,12 +168,16 @@ HTML **form element** to verify that JavaScript did run in the browser. <br>
    </script>
 DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN;
  }  else {
+  // ***********************************************************************************
+  // START - PHP AS NEEDED ************************************************************* 
   // Blocks where JavaScript did not run.
   
   // CHANGE 
   // echo "JavaScript did not run.";
   echo "";
   
+  // END - PHP AS NEEDED *************************************************************** 
+  // ***********************************************************************************  
  }
 ?>
  

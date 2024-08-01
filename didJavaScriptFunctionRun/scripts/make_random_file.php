@@ -5,12 +5,16 @@
   // Remove files in tmp folder over a day old.  
   shell_exec("find ../tmp/*  -type f,d -mtime +0 -not -path ../tmp/README.md -print | xargs rm -rf");
   
+  // Include cleaning function.
+  include("clean_random_character_function.php");
+  
   $uri = $_SERVER["REQUEST_URI"];
   $query = substr($uri, strrpos($uri, "?")+1);
   $query = urldecode($query);
-  $query = trim($query);
+/*  $query = trim($query);
   $query = htmlspecialchars($query);
-  $query = preg_replace('/[.\/=$]/', "", $query);
+  $query = preg_replace('/[.\/=$]/', "", $query);*/
+  $query = clean_random_character_function($query);
   $q_file = "../tmp/$query.txt";
   
   if (!file_exists("../tmp/$query/file.txt")) {
