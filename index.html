@@ -516,7 +516,7 @@
     this.style.border = "";
    });    
    example[i].addEventListener("click", function() {   
-    copyPaste.innerText = this.innerText;
+    copyPaste.innerText = this.textContent.replace(/\s{3,}/g, " ");;
     copyPaste.select();
     navigator.clipboard.writeText(copyPaste.innerText);
    });    

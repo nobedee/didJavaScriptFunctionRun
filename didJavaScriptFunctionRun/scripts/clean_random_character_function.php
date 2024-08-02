@@ -5,9 +5,8 @@
  function clean_random_character_function($cleanChar) {
   $cleanChar = trim($cleanChar);
   $cleanChar = htmlspecialchars($cleanChar);
-  $cleanChar = preg_replace('/[.\/=$]/', "", $cleanChar);  
+  $cleanChar = preg_replace('/[.\/=$\*]/', "", $cleanChar);  
   return $cleanChar;
  }
-
 
 ?>

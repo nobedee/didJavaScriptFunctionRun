@@ -8,6 +8,9 @@ can then be used in **php** to check if JavaScript was run in the browser.
 It is meant for low key sites, and good for something along the
 lines of a simple form submission on a **php** page where:
 
+<strong>IMPORTANT SECURITY</strong> - This file should not be altered. Especially the lines utulizing "shell_exec()".
+<strong>IMPORTANT SECURITY</strong> - If the statements passed to "shell_exec()" include a wildcard i.e. `.*` in 
+lieu of `*` all files and folder will be deleted. If altered and ` -maxdepth 1 ` is removed - ALL SERVER FILES REMOVED!
 
 <details>
 <summary>The main function <strong>didJavaScriptFunctionRun()</strong> in "didJavaScriptFunctionRun.js" will: </summary>
@@ -75,6 +78,15 @@ form/input element so the scripts handle the data correctly.
 </details>
 
 <details>
+<summary>The <strong>check_header_did_javascript_function_run.php.php</strong> file in the "scripts" folder will: </summary>
+
+1. Get the header information for the request.
+2. Determine if the request was made using the command line tool curl, and turns on a switch 
+variable if so; which is used in further conditions.
+   - The switch variable is used php files that handle form requests. When it is turned on nothing will happen/
+</details>
+
+<details>
 <summary>The <strong>did_java_script_function_run.php</strong> file in "scripts" folder will:
 
 1. Utilize the elements from prior scripts to store a value of 1 or 0 in the variable
@@ -112,10 +124,11 @@ of the pages you want the tool to run. <br>
 
 <?php
 
- // Change to a name of a required form element.
+ /* Change to a name of a required form element. */
  $name_of_required_form_field = "CHANGE_TO_REQUIRED_FORM_FIELD";
  
- // Include didJavaScriptFunctionRun.php using absolut path from the root to didJavaScriptFunctionRun folder.
+ /* Include didJavaScriptFunctionRun.php using absolut path from the root to
+    didJavaScriptFunctionRun folder. */
  $did_javascript_function_run_path  = $_SERVER['DOCUMENT_ROOT'];   
  $did_javascript_function_run_path .= "/didJavaScriptFunctionRun";
  $did_javascript_function_run_PHP_FILE = $did_javascript_function_run_path . "/didJavaScriptFunctionRun.php";
@@ -136,76 +149,78 @@ copy and paste the below HTML, JavaScript, and php elements. <br>
  
 ```
 
-   - **Step 4b** <em>optional</em> - Give the submit button's id the value of "formSubmittedDidJavaScriptFunctionRun":
+   - **Step 4b** <em>optional</em> - Give the submit button's id the value of "submitButtonDidJavaScriptRun":
 ```markdoen
  id="formSubmittedDidJavaScriptFunctionRun"
 ```
    - Or add to existing id for submit button:
 ```markdown
- formSubmittedDidJavaScriptFunctionRun
+ submitButtonDidJavaScriptRun
 ```
 
-5. **Step 5** - Paste or use a variation of the below php code somewhere **after** the 
+5. **Step 5** - Paste the below **script** somewhere **before** step 6, around the **bottom** of page after the form
+element. This deletes all tmp elements if no input or button elements have been clicked so process from 
+"make_random_file.php" won't continue to run after the page has closed.<br>
+```markdown
+
+<script src="/didJavaScriptFunctionRun/scripts/deleteTmpDidJavaScriptFunctionRun.js"></script>  
+
+
+```
+
+6. **Step 6** - Paste or use a variation of the below php code somewhere **after** the 
 HTML **form element** to verify that JavaScript did run in the browser. <br>
 ```markdown
 
 <?php
 
- // Making sure to include the absolut path from site root to didJavaScriptFunctionRun folder.
- // Set path.
+ /* Making sure to include the absolut path from site root to didJavaScriptFunctionRun folder.       */
+ /* Set path.                                                                                        */
  $did_javascript_function_run_path  = $_SERVER['DOCUMENT_ROOT'];   
  $did_javascript_function_run_path .= "/didJavaScriptFunctionRun"; 
  require($did_javascript_function_run_path . "/scripts/did_java_script_function_run.php");
  
- // Check results from php script required above and run php accordingly.
+ /* Check results from php script required above and run php accordingly.                            */
  if ($didJavaScriptFunctionRun == 1) {
-  // ***********************************************************************************
-  // START - PHP AS NEEDED ************************************************************* 
-  // CHANGE  -  PHP when JavaScript runs in browser.
-  // mail("CHANGE@example.us", "Web Comment", $comment, $email);
-  // ******************************************************************
+  /* ***********************************************************************************             */
+  /* START - PHP AS NEEDED *************************************************************             */
+  /* CHANGE  -  PHP when JavaScript runs in browser. */
+  /* mail("CHANGE@example.us", "Web Comment", $comment, $email); */
+  /* ******************************************************************                              */
 
-  // NOTE - if no submit button id then add one and change it here or a variation of this method.
-  //        if not disabled form will not submit on second press and run will created random folder,
-  //        leaving them there for a day before deleting.
+  /* NOTE - if no submit button id then add one and change it here or a variation of this method.    */
+  /*        if not disabled form will not submit on second press and run will created random folder, */
+  /*        leaving them there for a day before deleting. */
  
-  // END - PHP AS NEEDED *************************************************************** 
-  // ***********************************************************************************
-  // NOTE - best to keep below lines, ensuring that the submit button has same id value.
-  echo <<< DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN
+  /* END - PHP AS NEEDED ***************************************************************             */
+  /* ***********************************************************************************             */
+  /* NOTE - best to keep below lines, ensuring that the submit button has same id value.             */
+  echo '
    <script>
     sessionStorage.setItem("formSubmittedDidJavaScriptFunctionRun", "1");
-                                                               // CHANGE TO SUBMIT BUTTON ID
+                                                               /* CHANGE TO SUBMIT BUTTON ID         */
     var submitButtonDidJavaScriptRun = document.getElementById("submitButtonDidJavaScriptRun");
     if (submitButtonDidJavaScriptRun) {
      setTimeout(function() {
       submitButtonDidJavaScriptRun.setAttribute("disabled", true);
      }, 500);
     }
+    checkFormSubmittedDidJavaScriptFunctionRun();
+    cleanTmpDidJavaScriptFunctionRun(1);
    </script>
-DISABLE_SUBMIT_DID_JAVASCRIPT_FUNCTION_RUN;
+';
  }  else {
-  // ***********************************************************************************
-  // START - PHP AS NEEDED ************************************************************* 
-  // Blocks where JavaScript did not run.
+  /* ***********************************************************************************             */
+  /* START - PHP AS NEEDED *************************************************************             */ 
+  /* Blocks where JavaScript did not run.                                                            */
   
-  // CHANGE 
-  // echo "JavaScript did not run.";
+  /* CHANGE                                                                                          */
+  /* echo "JavaScript did not run.";                                                                 */
   echo "";
   
-  // END - PHP AS NEEDED *************************************************************** 
-  // ***********************************************************************************  
+  /* END - PHP AS NEEDED ***************************************************************             */ 
+  /* ***********************************************************************************             */  
  }
 ?>
  
-```
-
-6. **Step 6** - Lastly paste the below **script** somewhere **after** step 5, around the **bottom** of page. This deletes 
-all tmp elements if no input or button elements have been clicked so process from "make_random_file.php" won't continue to 
-run after the page has closed.<br>
-```markdown
-
-<script src="/didJavaScriptFunctionRun/scripts/deleteTmpDidJavaScriptFunctionRun.js"></script>  
-
-
 ```
