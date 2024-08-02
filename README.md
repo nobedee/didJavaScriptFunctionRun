@@ -1,5 +1,17 @@
 # Did JavaScript Function Run
 
+## README Navigation:
+
+<details>
+<summary>Click to Show Navigation</summary>
+
+  - [DISCLAIMER AND USE AGREEMENT](#legal-disclaimer-and-use-agreement)
+  - [Template Overview](#template-overview)
+  - [Template Files and Scripts](#template-files-and-scripts)
+  - [Instructions](#instructions)
+
+</details>
+
 `Ctrl + click` to see example of [didJavaScriptFunctionRun.js](https://jhauga.github.io/htmlpreview.github.com/?https://github.com/nobedee/didJavaScriptFunctionRun/blob/main/index.html)
 
 ## LEGAL DISCLAIMER AND USE AGREEMENT
