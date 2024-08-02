@@ -1,6 +1,4 @@
-# Did JavaScript Function Run
-
-## README Navigation:
+# Did JavaScript Function Run ![repo icon](favicon.png)
 
 <details>
 <summary>Click to Show Navigation</summary>
@@ -11,6 +9,8 @@
   - [Instructions](#instructions)
 
 </details>
+
+<br>
 
 `Ctrl + click` to see example of [didJavaScriptFunctionRun.js](https://jhauga.github.io/htmlpreview.github.com/?https://github.com/nobedee/didJavaScriptFunctionRun/blob/main/index.html)
 
