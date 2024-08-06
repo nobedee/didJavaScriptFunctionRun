@@ -4,8 +4,8 @@
   
   // Remove files in tmp folder over a day old.   
   // DANGER - !!!-do not change the below commands passed in shell_exec() functions-!!!
-  shell_exec("find ../tmp/* -maxdepth 1 -type d -mtime +0 -not -name 'README.md' -exec rm -f {} \;"); // DANGER - do not change
-  shell_exec("find ../tmp/* -maxdepth 1 -type f -mtime +0 -not -name 'README.md' -exec rm -f {} \;"); // DANGER - do not change
+  shell_exec("find ../tmp/* -maxdepth 1 -type d -mtime +0 -not -name 'README.md' -exec rm -rf {} \;"); // DANGER - do not change
+  shell_exec("find ../tmp/ -maxdepth 1 -type f -mtime +0 -not -name 'README.md' -exec rm -f {} \;");   // DANGER - do not change
   
   // Include cleaning function.
   include("clean_random_character_function.php");
