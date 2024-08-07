@@ -16,6 +16,8 @@
 
 ## LEGAL DISCLAIMER AND USE AGREEMENT
 
+First and most importantly - you have been informed that incorrectly implementing this template can cause unexpected results; and that editing any of the files located in the ` didJavaScriptFunctionRun/scripts ` folder can possibly delete all files and folders on you machine. Both local and/or remote. If you edit be sure you know what you're doing!
+
 By using this template, you acknowledge and agree to the following terms:
 
 1. **Implementation Responsibility**: You are solely responsible for the implementation of this template. Any deviation from the illustrated and/or provided order of operations in this repository is at your own risk.
