@@ -14,9 +14,9 @@
 
 `Ctrl + click` to see example of [didJavaScriptFunctionRun.js](https://jhauga.github.io/htmlpreview.github.com/?https://github.com/nobedee/didJavaScriptFunctionRun/blob/main/index.html)
 
-## LEGAL DISCLAIMER AND USE AGREEMENT
+First and most importantly - be aware that incorrectly implementing this template can cause unexpected results; and that editing any of the files located in the ` didJavaScriptFunctionRun/scripts ` folder can possibly delete all files and folders on you machine. Both local and remote. If you edit be sure you know what you're doing!
 
-First and most importantly - you have been informed that incorrectly implementing this template can cause unexpected results; and that editing any of the files located in the ` didJavaScriptFunctionRun/scripts ` folder can possibly delete all files and folders on you machine. Both local and/or remote. If you edit be sure you know what you're doing!
+## LEGAL DISCLAIMER AND USE AGREEMENT
 
 By using this template, you acknowledge and agree to the following terms:
 
